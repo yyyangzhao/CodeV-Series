@@ -26,6 +26,7 @@
   flex-grow: 0; /* 代码块不扩展 */
   overflow-y: auto; /* 内容溢出时显示垂直滚动条 */
   background-color: #282C34;
+  border-radius: 8px; /* <-- 添加这一行来设置圆角 */
 }
 
 /* 确保列的高度一致 */
@@ -42,14 +43,14 @@
 }
 
 .problem-description {
-  background-color: #f8fafc;
+  background-color: #F8E9DD;
   padding: 1rem;
   border-radius: 6px;
   margin-bottom: 1rem;
 }
 
 .reasoning-process {
-  background-color: #fffef0; /* Light yellow suitable for academic papers */
+  background-color: #FCF8D9; /* Light yellow suitable for academic papers */
   padding: 1rem;
   border-radius: 6px;
   margin-bottom: 1rem;
@@ -174,4 +175,68 @@ code.language-scala {
 #showcase-columns .reasoning-process pre code {
     white-space: pre-wrap;
   word-break: break-word;
+}
+
+.problem-dot {
+  display: inline-block;  /* Allows setting width/height */
+  width: 10px;           /* Adjust size of the circle */
+  height: 10px;          /* Adjust size of the circle */
+  background-color: #F8E9DD; /* CHANGE THIS to your desired color (e.g., Bulma's success green) */
+  border-radius: 50%;    /* Makes the square a circle */
+  margin-left: 8px;      /* Space between text and circle */
+  vertical-align: middle; /* Aligns the circle vertically with the text */
+}
+
+.code-dot {
+  display: inline-block;  /* Allows setting width/height */
+  width: 10px;           /* Adjust size of the circle */
+  height: 10px;          /* Adjust size of the circle */
+  background-color: #282C34; /* CHANGE THIS to your desired color (e.g., Bulma's success green) */
+  border-radius: 50%;    /* Makes the square a circle */
+  margin-left: 8px;      /* Space between text and circle */
+  vertical-align: middle; /* Aligns the circle vertically with the text */
+}
+
+.reason-dot {
+  display: inline-block;  /* Allows setting width/height */
+  width: 10px;           /* Adjust size of the circle */
+  height: 10px;          /* Adjust size of the circle */
+  background-color: #FCF8D9; /* CHANGE THIS to your desired color (e.g., Bulma's success green) */
+  border-radius: 50%;    /* Makes the square a circle */
+  margin-left: 8px;      /* Space between text and circle */
+  vertical-align: middle; /* Aligns the circle vertically with the text */
+}
+
+
+.pre-suf-dot {
+  display: inline-block;  /* Allows setting width/height */
+  width: 10px;           /* Adjust size of the circle */
+  height: 10px;          /* Adjust size of the circle */
+  background-color: #E0E8F7; /* CHANGE THIS to your desired color (e.g., Bulma's success green) */
+  border-radius: 50%;    /* Makes the square a circle */
+  margin-left: 8px;      /* Space between text and circle */
+  vertical-align: middle; /* Aligns the circle vertically with the text */
+}
+
+.mid-dot {
+  display: inline-block;  /* Allows setting width/height */
+  width: 10px;           /* Adjust size of the circle */
+  height: 10px;          /* Adjust size of the circle */
+  background-color: #E5F3E2; /* CHANGE THIS to your desired color (e.g., Bulma's success green) */
+  border-radius: 50%;    /* Makes the square a circle */
+  margin-left: 8px;      /* Space between text and circle */
+  vertical-align: middle; /* Aligns the circle vertically with the text */
+}
+
+.reasoning-process ol,
+.reasoning-process ul {
+    /* 根据需要调整数值 */
+    padding-left: 40px; 
+    /* 或者使用 margin-left: 20px; 等 */
+}
+
+/* 可能还需要为嵌套列表调整 */
+.reasoning-process ol ul,
+.reasoning-process ul ul {
+   padding-left: 20px; /* 嵌套列表的额外缩进 */
 }
