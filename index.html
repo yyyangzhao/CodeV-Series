@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="CodeV-All">
+  <meta name="keywords" content="Language Language Model, Program synthesis">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeV-All</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <!-- highlight code -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/logo.png"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">CodeV: Empowering LLMs for Verilog Generation through Multi-Level Summarization
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a>Yang Zhao</a><sup>1,2,5</sup>,</span>
+              <span class="author-block">
+                <a>Di Huang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a>Chongxiao Li</a><sup>1,2,5</sup>,
+              </span>
+              <span class="author-block">
+                <a>Pengwei Jin</a><sup>1,2,5</sup>,
+              </span>
+              <span class="author-block">
+                <a>Muxin Song</a><sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a>Yinan Xu</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a>Ziyuan Nan</a><sup>1,2,5</sup>,
+              </span>
+              <span class="author-block">
+                <a>Mingju Gao</a><sup>1,2,5</sup>,
+              </span>
+              <span class="author-block">
+                <a>Tianyun Ma</a><sup>1,4</sup>,
+              </span>
+              <span class="author-block">
+                <a>Lei Qi</a><sup>1,4</sup>,
+              </span>
+              <span class="author-block">
+                <a>Yansong Pan</a><sup>1,2,5</sup>,
+              </span>
+              <span class="author-block">
+                <a>Zhenxing Zhang</a><sup>1,4</sup>,
+              </span>
+              <span class="author-block">
+                <a>Rui Zhang</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a>Xishan Zhang</a><sup>1,5</sup>,
+              </span>
+              <span class="author-block">
+                <a>Zidong Du</a><sup>1,6</sup>,
+              </span>
+              <span class="author-block">
+                <a>Qi Guo</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a>Xing Hu</a><sup>1,6</sup>,
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>State Key Lab of Processors, Institute of Computing Technology, Chinese Academy of Science</span><br>
+              <span class="author-block"><sup>2</sup>University of Chinese Academy of Sciences</span><br>
+              <span class="author-block"><sup>3</sup>School of Information Science and Technology, ShanghaiTech University</span><br>
+              <span class="author-block"><sup>4</sup>University of Science and Technology of China</span><br>
+              <span class="author-block"><sup>5</sup>Cambricon Technologies</span><br>
+              <span class="author-block"><sup>6</sup>Shanghai Innovation Center for Processor Technologies</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2407.10424" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/iprc-dip/CodeV" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Raw data Link-->
+                <span class="link-block">
+                  <a href="https://huggingface.co/yang-z"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-cloud-download-alt"></i>
+                    </span>
+                    <span>Download</span>
+                  </a>
+                </span>
+                <!-- Raw data Link-->
+                <span class="link-block">
+                  <a href="https://iprc-dip.github.io/Chip-Design-LLM-Zoo/"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-trophy"></i>
+                    </span>
+                    <span>Leaderboard</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              The design flow of processors, particularly in hardware description languages (HDL) like Verilog and Chisel, is complex and costly. While recent advances in large language models (LLMs) have significantly improved coding tasks in software languages such as Python, their application in HDL generation remains limited due to the scarcity of high-quality HDL data. Traditional methods of adapting LLMs for hardware design rely on synthetic HDL datasets, which often suffer from low quality because even advanced LLMs like GPT perform poorly in the HDL domain. Moreover, these methods focus solely on chat tasks and the Verilog language, limiting their application scenarios.
+              </p>
+              <p>
+              In this paper, we observe that: (1) HDL code collected from the real world is of higher quality than code generated by LLMs. (2) LLMs like GPT-3.5 excel in summarizing HDL code rather than generating it. (3) An explicit language tag can help LLMs better adapt to the target language when there is insufficient data. Based on these observations, we propose an efficient LLM fine-tuning pipeline for HDL generation that integrates a multi-level summarization data synthesis process with a novel Chat-FIM-Tag supervised fine-tuning method. The pipeline enhances the generation of HDL code from natural language descriptions and enables the handling of various tasks such as chat and infilling incomplete code.
+              Utilizing this pipeline, we introduce CodeV, a series of HDL generation LLMs. Among them, CodeV-All not only possesses a more diverse range of language abilities, i.e., Verilog and Chisel, and a broader scope of tasks, i.e., Chat and fill-in-middle (FIM), but it also achieves performance on VerilogEval that is comparable to or even surpasses that of <em>ModelName-Verilog</em> fine-tuned on Verilog only, making them the first series of open-source LLMs designed for multi-scenario HDL generation.
+              </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+      <!-- Overview. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Overview</h2>
+          <div class="content">
+            <p>
+              We first gather and refine high-quality Verilog and Chisel code from open-source repositories. These codes are processed by GPT-3.5 to generate multi-level summaries. By pairing high-level descriptions with their respective codes, we create a high-quality dataset used to fine-tune base LLMs, resulting in the CodeV model series.
+            </p>
+          </div>
+          <img src="./static/images/overview_v20250413.png">
+        </div>
+      </div>
+      <!--/ Overview. -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3"> Multi-level Code Summarization</h2>
+            <p>
+              Manual annotation is prohibitively time-consuming and costly. Hence, we employed GPT-3.5 to generate high-level summaries for each Verilog module as its requirement description. As analyzed in VerilogEval, when required for summarising, LLMs often produce verbose descriptions, preferring line-by-line explanations over high-level summaries. To address this issue, we introduce a multi-level summarization method, employing few-shot learning to guide GPT-3.5 in first producing detailed descriptions and then abstracting high-level summaries.
+            </p>
+            <p>
+              An actual example of the prompt for multi-level summarization. (a) The prompt provided to GPT-3.5. (b) An example of the demonstrations, with code, low-level descriptions, and high-level summaries. (c) Summaries responded from GPT-3.5 with and (d) without multi-level summarization.
+            </p>
+            <img src="./static/images/multilevel_sum_demo.png">
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column">
+            <div class="content">
+                <h2 class="title is-3">Chat-FIM-Tag supervised fine-tuning</h2>
+                <p>
+                    To enhance the FIM capability of the model, we conduct infilling fine-tuning. Specifically, we randomly partition each training document into prefix, middle, and suffix sections, then concatenate them using special FIM tokens. We have processed the training document into the following tokenized version:
+                </p>
+                <p style="text-align: center;">
+                  <code>
+                      &lt;PRE&gt;&#123;prefix&#125;&lt;SUF&gt;&#123;suffix&#125;&lt;MID&gt;&#123;middle&#125;&lt;EOT&gt;&lt;/EOT&gt;
+                  </code>
+                </p>
+                <p>
+                    where <code>&lt;PRE&gt;</code>, <code>&lt;MID&gt;</code>, <code>&lt;SUF&gt;</code>, and <code>&lt;EOT&gt;</code> need to be modified according to the model's tokenization. It is noteworthy that we preserve the loss for all the prefix, middle, and suffix sections in this study.
+                </p>
+                <p>
+                    When the data for a single language is limited, including multiple languages can affect the performance of that language. To address this challenge, we have empirically found that emphasizing the distinctions between languages during training helps improve the performance of each language. Specifically, we incorporate language-specific tags, that is <code>&lt;Verilog&gt;</code> and <code>&lt;Chisel&gt;</code>, during training.
+                </p>
+            </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3">Results on VerilogEval and RTLLM</h2>
+            <p>
+              In this section, we compare our method with previous work fairly on VerilogEval and RTLLM.
+              Table <a href="#tab:main_exp">Table 1</a> compares the main results of our <strong>CodeV</strong> with baseline methods on the VerilogEval and RTLLM benchmarks. 
+              We evaluate CodeLlama, DeepSeek-Coder, CodeQwen, and Qwen2.5-Coder, while other baseline results are sourced from RTLCoder, BetterV, AutoVCoder, OriGen, CraftRTL, and HAVEN. The results show that:
+            </p>
+            <p>
+              <strong>CodeV-Verilog performs well and achieves state-of-the-art on Verilog-Machine.</strong> 
+              CodeV-Verilog performed well in the VerilogEval and RTLLM benchmarks, surpassing the RTLCoder and BetterV methods in the VerilogEval benchmark test,
+              particularly in the most challenging pass@1 metric where CodeV-Verilog-QC achieves 80.1% in VerilogEval-machine, and CodeV-Verilog-QC achieves 59.2% in VerilogEval-human, significantly outperforming both GPT-4 and BetterV-CodeQwen. In the RTLLM v1.1 benchmark, CodeV-Verilog-CL nearly matches GPT-4's functional check success rate, failing in just 1 more case out of 29 circuits compared to GPT-4, and significantly outperforms all other models. Also, CodeV-Verilog significantly outperforms its GPT-3.5-turbo-0125 summarization model. These results demonstrate that, contributed by a high-quality instruction tuning dataset, CodeV-Verilog exhibits significant superiority in Verilog generation tasks.
+            </p>
+            <p>
+              <strong>The performance of different base models becomes closer after fine-tuning.</strong>
+              This is reasonable because the base models are trained on different training data but use the same fine-tuning data, which reduces their differences. Additionally, we find that after fine-tuning, CodeQwen surpasses DeepSeek-Coder, and CodeLlama also outperformed the other two models on VerilogEval-Machine pass@1 after fine-tuning. This indicates that the performance of a base model in specific domains does not necessarily align with its performance after fine-tuning.
+            </p>
+            <figure>
+              <img src="./static/images/result20250413.png" alt="Comparison Results">
+              <figcaption>Table 1: Comparison of our CodeV models against various baseline models. Accuracy data are cited from their original papers. * are the result updated by us with the new version.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3">Results on Multi-lingual and Multi-Scenario Tasks</h2>
+            <p>
+              We evaluate LLMs' capabilities for multi-lingual and multi-scenario tasks in this section.
+              As mentioned before, we added 18.7K Chisel data extension based on the existing 165K Verilog dataset, thereby constructing a more comprehensive training corpus, 184K-Verilog-Chisel. 
+              Then, we utilize the Chat-FIM-Tag supervised fine-tuning process to develop the CodeV-All series, which can handle tasks in different languages (Verilog and Chisel) and scenarios (Chat and FIM).
+              
+              To evaluate the models' multi-lingual (Verilog and Chisel) generation capabilities on Chat tasks, we evaluate both our CodeV-All and baseline LLMs across four benchmarks: VerilogEval, RTLLM, ChiselTutorial, and ChiselEval. The results are presented in Tables 1 and 2. To evaluate the models' multi-scenario ability, we evaluate CodeV-All on the proposed FIM benchmarks. The results are shown in Tables 3, 4, and 5.
+               <!-- We can conclude that: -->
+              
+              <!-- <ul>
+                  <li><strong>The inclusion of the Chisel dataset leads to an improvement in Chisel performance.</strong></li>
+              
+                  <li><strong>CodeV-All demonstrates strong performance on Chisel generation tasks.</strong></li>
+              
+                  <li><strong>CodeV-All performs comparable to CodeV-Verilog on Verilog tasks.</strong></li>
+              
+                  <li><strong>Our fine-tuning method is effective in improving the model's infilling performance.</strong></li>
+              </ul> -->
+            </p>
+            <div class="columns is-centered">
+              <!-- Visual Effects. -->
+              <div class="column" style="max-width: 100%; width: 100%;">
+                <div class="content">
+                  <h2 class="title is-3"></h2>
+                  <p></p>
+                  <figure>
+                    <img src="./static/images/chisel_benchmark.png" style="width: 100%;" alt="ChiselEval and ChiselTutorial Performance">
+                    <figcaption>Table 2: Performance of models on ChiselEval and ChiselTutorial.</figcaption>
+                  </figure>
+                </div>
+              </div>
+              <!--/ Visual Effects. -->
+              <!-- Matting. -->
+              <div class="column"  style="max-width: 100%; width: 100%;">
+                <div class="content">
+                  <h2 class="title is-3"></h2>
+                  <p></p>
+                  <figure>
+                      <img src="./static/images/rtllm-fim-benchmark.png" alt="ChiselEval-FIM Comparison">
+                      <figcaption>Table 3: Comparison between our CodeV models and the base models on VerilogEval-FIM.</figcaption>
+                  </figure>
+                </div>
+              </div>
+              <!--/ Matting. -->
+            </div>
+            <figure>
+              <img src="./static/images/FIM-chisel-benchmark.png" style="width: 70%;" >
+              <figcaption>Table 4: Comparison between our CodeV-All models and the base models on ChiselEval-FIM.</figcaption>
+            </figure>
+            <figure>
+              <img src="./static/images/verilog-fim-benchmark.png" >
+              <figcaption>Table 5: Comparison between our CodeV-All models and the base models on VerilogEval-FIM.</figcaption>
+            </figure>
+            
+        </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3"> LLM-generated Verilog code </h2>
+            <p>
+              We have collected existing LLMs of Verilog code and demonstrated their performance on VerilogEval and RTLLM in
+              <a href="https://iprc-dip.github.io/Chip-Design-LLM-Zoo/" target="_blank">Chip Design LLM Zoo</a>.
+            </p>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Method -->
+
+      <!-- <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Quick Start</h2>
+          <pre style="width: 100%; overflow: auto; background: none;">
+          <code class="python" style="min-width: 100%; width: 0px; overflow: scroll; font-family: 'Cascadia Code', 'Menlo', 'Courier New', monospace;">
+from transformers import pipeline
+import torch
+prompt= "FILL IN THE QUESTION"
+generator = pipeline(
+  model="CODEV",
+  task="text-generation",
+  torch_dtype=torch.bfloat16,
+  device_map="auto",
+)
+result = generator(prompt , max_length=2048,num_return_sequences=1, temperature=0.0)
+response = result[0]["generated_text"]
+print("Response:", response)
+            </code>
+          </pre>
+        </div>
+      </div>
+    </div> -->
+  
+    <!-- <hr/> -->
+    <!-- <section class="section" id="BibTeX"> -->
+      <!-- <div class="columns is-centered"> -->
+        <div class="container content is-max-desktop">
+            <h2 class="title is-3"> BibTex </h2>
+              <pre>
+  <code class="nohighlight" style="background-color: transparent; color: black; font-family: monospace;">@misc{zhao2024codevempoweringllmsverilog,
+    title={CodeV: Empowering LLMs for Verilog Generation through Multi-Level Summarization},
+    author={Yang Zhao and Di Huang and Chongxiao Li and Pengwei Jin and Ziyuan Nan and Tianyun Ma and Lei Qi and Yansong Pan and Zhenxing Zhang and Rui Zhang and Xishan Zhang and Zidong Du and Qi Guo and Xing Hu and Yunji Chen},
+    year={2024},
+    eprint={2407.10424},
+    archivePrefix={arXiv},
+    primaryClass={cs.PL},
+    url={https://arxiv.org/abs/2407.10424},
+  }</code>
+              </pre>
+      </div>
+      <!-- </section> -->
+  </section>
+
+  <!-- <hr/> -->
+  
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              Thanks for the website template <a href="https://nerfies.github.io">Nerfies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
