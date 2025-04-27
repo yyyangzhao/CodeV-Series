@@ -1,0 +1,177 @@
+/* 确保卡片高度一致 */
+.card {
+  /* display: flex; */ /* Removed duplicate */
+  flex-direction: column;
+  height: 100%; /* 使卡片充满父容器高度 */
+  overflow: hidden;
+  border-radius: 8px;
+  /* --- MODIFICATION: Base transition for card transform/shadow --- */
+  /* Adjust 0.3s if you want card's lift/scale effect return time changed */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Make sure card itself is display:flex if needed for its internal layout */
+  display: flex;
+}
+
+/* 统一卡片内容区域的最小高度 */
+.card-content {
+  flex-grow: 1; /* 让内容区域扩展以填充空间 */
+  min-height: 10px; /* 确保内容区域高度一致 */
+  max-height: 600px;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* 设置代码块为固定高度并启用滚动 */
+.code-block {
+  flex-grow: 0; /* 代码块不扩展 */
+  overflow-y: auto; /* 内容溢出时显示垂直滚动条 */
+  background-color: #282C34;
+}
+
+/* 确保列的高度一致 */
+.columns.is-multiline .column {
+  display: flex; /* 使列内卡片高度一致 */
+}
+
+/* 优化代码块的内边距和字体 */
+.code-block pre {
+  margin: 0;
+  padding: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.problem-description {
+  background-color: #f8fafc;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.reasoning-process {
+  background-color: #fffef0; /* Light yellow suitable for academic papers */
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+pre.card {
+  background-color: #282C34;
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin: 0;
+}
+code.language-verilog {
+  color: #e6e6e6;
+}
+code.language-scala {
+  color: #e6e6e6;
+}
+
+/* --- REMOVED simple card hover lift to avoid conflict with main effect --- */
+/*
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+*/
+
+
+/* Container for the columns */
+#showcase-columns {
+  position: relative;
+  /* min-height: 500px; */ /* Optional: Adjust based on card height */
+   /* overflow: hidden; */ /* Removing overflow hidden might be needed depending on scale effect */
+   display: flex;
+   flex-wrap: wrap; /* Keep Bulma's wrapping behavior */
+}
+
+/* --- CLEANUP: Removed potentially conflicting/old transition rule --- */
+/*
+#showcase-columns .column {
+    transition: width 0.4s ease, left 0.4s ease, opacity 0.4s ease;
+    vertical-align: top;
+    opacity: 1;
+    height: 100%;
+  }
+*/
+
+/* --- MODIFICATION: Base transition for COLUMN (push aside effect) --- */
+#showcase-columns > .column.is-one-third {
+  /* --- CHANGE THE TIME HERE (e.g., 0.3s) for return animation --- */
+  transition: flex-basis 0.3s ease, flex-grow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  will-change: flex-basis, flex-grow, transform;
+  /* align-self: stretch; */ /* Uncomment if heights become uneven */
+  /* Ensure columns take up full height if needed */
+  /* height: 100%; */ /* Often handled by display:flex on parent */
+  /* Add display: flex here if columns themselves need to be flex containers */
+  display: flex;
+}
+
+/* --- STYLES FOR PUSH ASIDE EFFECT (Using JS classes .is-hovered-expanded / .is-pushed-aside) --- */
+
+/* Styles for the column being hovered */
+#showcase-columns > .column.is-hovered-expanded {
+  flex-basis: 45%; /* Adjust as needed */
+  flex-grow: 2;     /* Adjust as needed */
+  z-index: 10;
+}
+
+/* Scale up the CARD inside the hovered column */
+#showcase-columns > .column.is-hovered-expanded .card {
+  /* Ensure this transform uses the transition defined on .card */
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Styles for the columns being pushed aside */
+#showcase-columns > .column.is-pushed-aside {
+  flex-basis: 27.5%; /* Adjust as needed (45 + 27.5 + 27.5 = 100) */
+  flex-grow: 1;      /* Adjust as needed */
+  /* Optional: slightly fade or scale down the pushed items */
+  /* opacity: 0.8; */
+  /* transform: scale(0.98); */ /* Ensure this uses transition on column or card if added */
+}
+
+
+/* --- CLEANUP / COMMENT OUT: Old styles for expand/hide siblings effect --- */
+/* If you are using the "push aside" effect above, DELETE these rules */
+
+#showcase-columns .column.is-expanded {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  visibility: visible;
+  opacity: 1;
+  transition: width 0.4s ease, left 0.4s ease, opacity 0.4s ease;
+}
+
+#showcase-columns .column.is-expanded .card {
+   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+   transform: scale(1);
+}
+
+#showcase-columns .column.is-sibling-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#showcase-columns .column.is-expanded .card .card-content {
+  white-space: normal;
+  overflow-y: auto;
+  height: 100%;
+}
+
+
+/* Styling for code blocks inside cards */
+#showcase-columns .code-block pre code {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+#showcase-columns .reasoning-process pre code {
+    white-space: pre-wrap;
+  word-break: break-word;
+}
