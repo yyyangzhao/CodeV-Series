@@ -357,25 +357,500 @@ endmodule
                   <p>MID <span class="mid-dot"></span></p>
                 </div>
                 <hr/>
+                  <div class="content">
+                    <h4 class="title is-5">VerilogEval V1</h4>
+                    <p>Case 1:</p>
+                  </div>
                   <div class="problem-description">
                     <h5 class="title is-6 has-text-weight-bold">Problem Description</h5>
-                    <p>Create a Verilog module for an 8-bit counter that increments on each positive clock edge and resets to zero when a reset signal is active.</p>
+                    <p style="white-space: pre-wrap;">Implement a Mealy-type finite state machine that recognizes the sequence "101" on an input signal named x. Your FSM should have an output signal, z, that is asserted to logic-1 when the "101" sequence is detected. Your FSM should also have a negative edge triggered asynchronous reset. You may only have 3 states in your state machine. Your FSM should recognize overlapping sequences.</p>
+                  </div>
+                  <div class="code-block">
+                    <pre class="card"><code class="language-verilog">
+module top_module (
+  input clk,
+  input aresetn,
+  input x,
+  output reg z
+);
+  reg [1:0] state, next_state;
+  parameter A = 0, B = 1, C = 2;
+  always @(*) begin
+    case (state)
+      A: next_state = x ? B : A;
+      B: next_state = x ? B : C;
+      C: next_state = x ? B : A;
+    endcase
+  end
+  always @(posedge clk, negedge aresetn) begin
+    if (~aresetn)
+      state <= A;
+    else
+      state <= next_state;
+  end
+  always @(*) begin
+    z = (state == C) & x;
+  end
+endmodule
+
+                    </code></pre>
+                  </div>
+                  <div class="content">
+                    <p></p>
+                    <h4 class="title is-5">ChiselEval</h4>
+                    <p>Case 1:</p>
+                  </div>
+                  <div class="problem-description">
+                    <h5 class="title is-6 has-text-weight-bold">Problem Description</h5>
+                    <p style="white-space: pre-wrap;">Generate Chisel code based on the following description, when the description mentions the `clk` signal, use Chisel's implicit clock signal:
+Make a decade counter that counts 1 through 10, inclusive. The reset input is active high synchronous, and should reset the counter to 1.</p>
                   </div>
                   <div class="code-block">
                     <pre class="card"><code class="language-scala">
-  import chisel3._
-  
-  class Counter extends Module {
-  val io = IO(new Bundle {
-  val count = Output(UInt(8.W))
-  })
-  val counter = RegInit(0.U(8.W))
-  counter := counter + 1.U
-  
-  
-  io.count := counter
+import chisel3._
+import chisel3.util._
+
+class TopModule extends Module {
+    val io = IO(new Bundle {
+    val reset = Input(Bool())
+    val q = Output(UInt(4.W))  
+    })
+  val counter = RegInit(1.U(4.W))
+  when(counter === 10.U) {
+    counter := 1.U
+  } .otherwise {
+    counter := counter + 1.U
   }
+  io.q := counter
+  when(io.reset) {
+    counter := 1.U
+  }
+}
                     </code></pre>
+                  </div>
+                  <div class="content">
+                    <p></p>
+                    <h4 class="title is-5">ChiselTutorial</h4>
+                    <p>Case 1:</p>
+                  </div>
+                  <div class="problem-description">
+                    <h5 class="title is-6 has-text-weight-bold">Problem Description</h5>
+                    <p style="white-space: pre-wrap;">This is example of multiplexer 2-to-1 with 'sel' as control signal.
+Multiplexed inputs are 'in0' and 'in1'.
+```scala
+package solutions
+
+import chisel3._
+class Mux2 extends Module {
+  val io = IO(new Bundle {
+    val sel = Input(UInt(1.W))
+    val in0 = Input(UInt(1.W))
+    val in1 = Input(UInt(1.W))
+    val out = Output(UInt(1.W))
+  })
+  io.out := (io.sel & io.in1) | (~io.sel & io.in0)
+}
+```
+Build a 4-to-1 multiplexer out of three 2-to-1 multiplexers
+The first multiplexer is already done for you</p>
+                  </div>
+                  <div class="code-block">
+                    <pre class="card"><code class="language-scala">
+class Mux4 extends Module {
+val io = IO(new Bundle {
+  val in0 = Input(UInt(1.W))
+  val in1 = Input(UInt(1.W))
+  val in2 = Input(UInt(1.W))
+  val in3 = Input(UInt(1.W))
+  val sel = Input(UInt(2.W))
+  val out = Output(UInt(1.W))
+})
+  val m0 = Module(new Mux2())
+  m0.io.sel := io.sel(0)
+  m0.io.in0 := io.in0
+  m0.io.in1 := io.in1
+  val m1 = Module(new Mux2())
+  m1.io.sel := io.sel(0)
+  m1.io.in0 := io.in2
+  m1.io.in1 := io.in3
+  val m2 = Module(new Mux2())
+  m2.io.sel := io.sel(1)
+  m2.io.in0 := m0.io.out
+  m2.io.in1 := m1.io.out
+  io.out := m2.io.out
+}
+                    </code></pre>
+                  </div>
+
+                  <div class="content">
+                    <p></p>
+                    <h4 class="title is-5">ChiselEval-FIM</h4>
+                    <p>Case 1:</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">FIM Input</h5>
+                    <p style="white-space: pre-wrap;">import chisel3._
+import chisel3.util._
+
+class TopModule extends Module {
+    val io = IO(new Bundle {
+    val a = Input(Bool()) 
+    val b = Input(Bool()) 
+    val c = Input(Bool()) 
+    val d = Input(Bool()) 
+    val q = Output(Bool()) 
+    })
+
+  io.q := (io.a | io.b) & (io.c | io.d)</p>
+                  </div>
+                  <div class="problem-mid">
+                    <h5 class="title is-6 has-text-weight-bold">MID</h5>
+                    <p style="white-space: pre-wrap;">
+  }</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">SUF</h5>
+                    <p style="white-space: pre-wrap;">object TopModule extends App {
+    emitVerilog(new TopModule(), Array("--target-dir", "generated"))
+}</p>
+                  </div>
+                  <div class="content">
+                    <p></p>
+                    <!-- <h4 class="title is-5">ChiselEval-FIM</h4> -->
+                    <p>Case 2:</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">FIM Input</h5>
+                    <p style="white-space: pre-wrap;">import chisel3._
+import chisel3.util._
+class TopModule extends Module {
+  val io = IO(new Bundle {
+    val in = Input(Bool())
+    val out = Output(Bool())
+  })
+
+  
+  val states = Enum(4)
+  val (a, b, c, d) = (states(0), states(1), states(2), states(3))
+
+  
+  val state = RegInit(a)
+
+  
+  val next = WireDefault(a)
+
+  when (state === a) {
+    next := Mux(io.in, b, a)
+  }.elsewhen (state === b)</p>
+                  </div>
+                  <div class="problem-mid">
+                    <h5 class="title is-6 has-text-weight-bold">MID</h5>
+                    <p style="white-space: pre-wrap;">
+{
+    next := Mux(io.i</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">SUF</h5>
+                    <p style="white-space: pre-wrap;">n, b, c)
+  }.elsewhen (state === c) {
+    next := Mux(io.in, d, a)
+  }.elsewhen (state === d) {
+    next := Mux(io.in, b, c)
+  }
+
+  
+  state := next
+
+  
+  io.out := (state === d)
+}
+
+object TopModule extends App {
+    emitVerilog(new TopModule(), Array("--target-dir", "generated"))
+}</p>
+                  </div>
+                  <div class="content">
+                    <p></p>
+                    <!-- <h4 class="title is-5">ChiselEval-FIM</h4> -->
+                    <p>Case 3:</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">PRE</h5>
+                    <p style="white-space: pre-wrap;">import chisel3._
+import chisel3.util._
+
+class TopModule extends Module {
+    val io = IO(new Bundle {
+</p>
+                  </div>
+                  <div class="problem-mid">
+                    <h5 class="title is-6 has-text-weight-bold">MID</h5>
+                    <p style="white-space: pre-wrap;">
+    val a = Input(Bool())</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">SUF</h5>
+                    <p style="white-space: pre-wrap;">		val b = Input(Bool())
+    val sum = Output(Bool())
+    val cout = Output(Bool())
+    })
+  val result = io.a +& io.b
+
+  
+    io.sum := result(0)   
+    io.cout := result(1)  
+  
+}
+object TopModule extends App {
+    emitVerilog(new TopModule(), Array("--target-dir", "generated"))
+}</p>
+                  </div>
+                  <div class="content">
+                    <p></p>
+                    <h4 class="title is-5">RTLLM V1.1-FIM</h4>
+                    <p>Case 1:</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">PRE</h5>
+                    <p style="white-space: pre-wrap;">`timescale 1ns / 1ps
+
+module alu(
+    input [31:0] a,
+    input [31:0] b,
+    input [5:0] aluc,
+    output [31:0] r,
+    output zero,
+    output carry,
+    output negative,
+    output overflow,
+    output flag
+    );
+    
+
+    parameter ADD = 6'b100000;
+    parameter ADDU = 6'b100001;
+    parameter SUB = 6'b100010;
+    parameter SUBU = 6'b100011;
+    parameter AND = 6'b100100;
+    parameter OR = 6'b100101;
+    parameter XOR = 6'b100110;
+    parameter NOR = 6'b100111;
+    parameter SLT = 6'b101010;
+    parameter SLTU = 6'b101011;
+    parameter SLL = 6'b000000;
+    parameter SRL = 6'b000010;
+    parameter SRA = 6'b000011;
+    parameter SLLV = 6'b000100;
+    parameter SRLV = 6'b000110;
+    parameter SRAV = 6'b000111;
+    parameter JR = 6'b001000;
+    
+    parameter LUI = 6'b001111;
+      
+    
+    wire signed [31:0] a_signed;
+    wire signed [31:0] b_signed;
+    
+  
+    reg [32:0] res;
+    
+    
+    assign a_signed = a;
+    assign b_signed = b;
+    assign r = res[31:0];
+    
+    assign flag = (aluc == SLT || aluc == SLTU) ? ((aluc == SLT) ? (a_signed < b_signed) : (a < b)) : 1'bz; 
+    assign zero = (res == 32'b0) ? 1'b1 : 1'b0;
+    
+    always @ (a or b or aluc)
+    begin
+        case(aluc)</p>
+                  </div>
+                  <div class="problem-mid">
+                    <h5 class="title is-6 has-text-weight-bold">MID</h5>
+                    <p style="white-space: pre-wrap;">
+        ADD: begin
+            res <= a_signed + b_signed;
+        end
+        ADDU: begin
+            res <= a + b;
+        end
+        SUB: begin
+            res <= a_signed - b_signed;
+        end
+        SUBU: begin
+            res <= a - b;</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">SUF</h5>
+                    <p style="white-space: pre-wrap;">
+        end
+        AND: begin
+            res <= a & b;
+        end
+        OR: begin
+            res <= a | b;
+        end
+        XOR: begin
+            res <= a ^ b;
+        end
+        NOR: begin
+            res <= ~(a | b);
+        end
+        SLT: begin
+            res <= a_signed < b_signed ? 1 : 0;
+        end
+        SLTU: begin
+            res <= a < b ? 1 : 0;
+        end
+        SLL: begin
+            res <= b << a;
+        end
+        SRL: begin
+            res <= b >> a;
+        end
+        SRA: begin
+            res <= b_signed >>> a_signed;
+        end
+        SLLV: begin
+            res <= b << a[4:0];
+        end
+        SRLV: begin
+            res <= b >> a[4:0];
+        end
+        SRAV: begin
+            res <= b_signed >>> a_signed[4:0];
+        end
+        LUI: begin
+            res <= {a[15:0], 16'h0000};
+        end
+        default:
+        begin
+            res <= 32'bz;
+        end
+    endcase
+end
+endmodule</p>
+                  </div>
+                  <div class="content">
+                    <p></p>
+                    <!-- <h4 class="title is-5">ChiselEval-FIM</h4> -->
+                    <p>Case 2:</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">PRE</h5>
+                    <p style="white-space: pre-wrap;">`timescale 1ns/1ns
+module edge_detect(
+  input clk,
+  input rst_n,
+  input a,
+  
+  output reg rise,
+  output reg down
+);
+  reg a0;
+    always@(posedge clk or negedge rst_n) begin
+        if(~rst_n) begin
+            rise <= 1'b0;
+            down <= 1'b0;
+        end 
+        else begin
+            if(a & ~a0) begin</p>
+                  </div>
+                  <div class="problem-mid">
+                    <h5 class="title is-6 has-text-weight-bold">MID</h5>
+                    <p style="white-space: pre-wrap;">
+          rise <= 1'b1;
+          down <= 1'b0;
+      end
+      else if(~a & a0) begin
+          rise <= 1'b0;
+          down <= 1'b1;
+      end
+      else begin
+          rise <= 1'b0;
+          down <= 1'b0;</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">SUF</h5>
+                    <p style="white-space: pre-wrap;">    end
+        end
+    end
+    
+    always@(posedge clk or negedge rst_n) begin
+        if(~rst_n) 
+            a0 <= 0;
+        else 
+            a0 <= a;
+    end
+endmodule</p>
+                  </div>
+                  <div class="content">
+                    <p></p>
+                    <!-- <h4 class="title is-5">ChiselEval-FIM</h4> -->
+                    <p>Case 2:</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">PRE</h5>
+                    <p style="white-space: pre-wrap;">`timescale 1ns/1ns
+module multi_pipe_4bit#(
+  parameter size = 4
+)(
+  input 						clk 		,   
+  input 						rst_n		,
+  input	[size-1:0]			mul_a		,
+  input	[size-1:0]			mul_b		,
+  
+    output	reg	[size*2-1:0]	mul_out		
+);
+
+parameter N = 2 * size;
+
+reg     [N-1:0]     sum_tmp1                ;
+reg     [N-1:0]     sum_tmp2                ;
+wire    [N-1:0]     mul_a_extend            ;
+wire    [N-1:0]     mul_b_extend            ;
+
+wire    [N-1:0]     mul_result[size-1:0]    ;
+
+genvar i;
+generate
+    for(i = 0; i < size; i = i + 1) begin:add
+        assign mul_result[i] = mul_b[i] ? mul_a_extend << i : 'd0;
+    end
+endgenerate
+
+assign mul_a_extend = {{size{1'b0}}, mul_a};
+assign mul_b_extend = {{size{1'b0}}, mul_b};
+
+always @(posedge clk or negedge rst_n) begin
+    if(!rst_n) begin
+        sum_tmp1 <= 'd0;
+        sum_tmp2 <= 'd0;
+    end
+    else begin
+        sum_tmp1 <= mul_result[0] + mul_result[1];
+        sum_tmp2 <= mul_result[2] + mul_result[3];
+    end
+end
+
+always @(posedge clk or negedge rst_n) begin
+    if(!rst_n) begin
+        mul_out <= 'd0;
+    end</p>
+                  </div>
+                  <div class="problem-mid">
+                    <h5 class="title is-6 has-text-weight-bold">MID</h5>
+                    <p style="white-space: pre-wrap;">
+  else begin</p>
+                  </div>
+                  <div class="problem-pre">
+                    <h5 class="title is-6 has-text-weight-bold">SUF</h5>
+                    <p style="white-space: pre-wrap;">        mul_out <= sum_tmp1 + sum_tmp2;
+    end
+end
+
+endmodule</p>
                   </div>
                 </div>
               </div>

@@ -49,6 +49,20 @@
   margin-bottom: 1rem;
 }
 
+.problem-pre {
+  background-color: #E0E8F7;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.problem-mid {
+  background-color: #E5F3E2;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
 .reasoning-process {
   background-color: #FCF8D9; /* Light yellow suitable for academic papers */
   padding: 1rem;
