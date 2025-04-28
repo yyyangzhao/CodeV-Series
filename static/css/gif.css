@@ -1,0 +1,6 @@
+.gif-column img {
+    border-radius: 10px; /* 你可以调整这个数值来改变弧度大小 */
+    display: block; /* 确保图片是块级元素，有时有助于避免奇怪的间距 */
+    width: 100%;   /* 确保图片宽度适应其容器 */
+    height: auto;  /* 保持图片纵横比 */
+  }
