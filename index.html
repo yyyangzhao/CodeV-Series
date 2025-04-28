@@ -5820,7 +5820,54 @@ endmodule
   <!--/ Three-Column Showcase Section with Hover Effect -->
   </section>
 
+    <!-- <hr/> -->
+    <!-- <section class="section" id="BibTeX"> -->
+      <!-- <div class="columns is-centered"> -->
+        
+      <!-- </section> -->
+  </section>
+
+  <!-- <hr/> -->
+  
   <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3"> Multi-level Code Summarization</h2>
+            <p>
+              Manual annotation is prohibitively time-consuming and costly. Hence, we employed GPT-3.5 to generate high-level summaries for each Verilog module as its requirement description. As analyzed in VerilogEval, when required for summarising, LLMs often produce verbose descriptions, preferring line-by-line explanations over high-level summaries. To address this issue, we introduce a multi-level summarization method, employing few-shot learning to guide GPT-3.5 in first producing detailed descriptions and then abstracting high-level summaries.
+            </p>
+            <p>
+              An actual example of the prompt for multi-level summarization. (a) The prompt provided to GPT-3.5. (b) An example of the demonstrations, with code, low-level descriptions, and high-level summaries. (c) Summaries responded from GPT-3.5 with and (d) without multi-level summarization.
+            </p>
+            <img src="./static/images/multilevel_sum_demo.png">
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">
+        <div class="column">
+            <div class="content">
+                <h2 class="title is-3">Chat-FIM-Tag supervised fine-tuning</h2>
+                <p>
+                    To enhance the FIM capability of the model, we conduct infilling fine-tuning. Specifically, we randomly partition each training document into prefix, middle, and suffix sections, then concatenate them using special FIM tokens. We have processed the training document into the following tokenized version:
+                </p>
+                <p style="text-align: center;">
+                  <code>
+                      &lt;PRE&gt;&#123;prefix&#125;&lt;SUF&gt;&#123;suffix&#125;&lt;MID&gt;&#123;middle&#125;&lt;EOT&gt;&lt;/EOT&gt;
+                  </code>
+                </p>
+                <p>
+                    where <code>&lt;PRE&gt;</code>, <code>&lt;MID&gt;</code>, <code>&lt;SUF&gt;</code>, and <code>&lt;EOT&gt;</code> need to be modified according to the model's tokenization. It is noteworthy that we preserve the loss for all the prefix, middle, and suffix sections in this study.
+                </p>
+                <p>
+                    When the data for a single language is limited, including multiple languages can affect the performance of that language. To address this challenge, we have empirically found that emphasizing the distinctions between languages during training helps improve the performance of each language. Specifically, we incorporate language-specific tags, that is <code>&lt;Verilog&gt;</code> and <code>&lt;Chisel&gt;</code>, during training.
+                </p>
+            </div>
+        </div>
+      </div>
+
     <div class="container is-max-desktop">
       
       <div class="columns is-centered">
@@ -5845,29 +5892,22 @@ print("Response:", response)
         </div>
       </div>
     </div>
-    <!-- <hr/> -->
-    <!-- <section class="section" id="BibTeX"> -->
-      <!-- <div class="columns is-centered"> -->
-        <div class="container content is-max-desktop">
-            <h2 class="title is-3"> BibTex </h2>
-              <pre>
+      <div class="container content is-max-desktop">
+        <h2 class="title is-3"> BibTex </h2>
+          <pre>
 
-  <code class="nohighlight" style="background-color: transparent; color: black; font-family: monospace;">@misc{zhao2024codevempoweringllmsverilog,
-    title={CodeV: Empowering LLMs for Verilog Generation through Multi-Level Summarization},
-    author={Yang Zhao and Di Huang and Chongxiao Li and Pengwei Jin and Ziyuan Nan and Tianyun Ma and Lei Qi and Yansong Pan and Zhenxing Zhang and Rui Zhang and Xishan Zhang and Zidong Du and Qi Guo and Xing Hu and Yunji Chen},
-    year={2024},
-    eprint={2407.10424},
-    archivePrefix={arXiv},
-    primaryClass={cs.PL},
-    url={https://arxiv.org/abs/2407.10424},
-  }</code>
-              </pre>
-      </div>
-      <!-- </section> -->
+<code class="nohighlight" style="background-color: transparent; color: black; font-family: monospace;">@misc{zhao2024codevempoweringllmsverilog,
+title={CodeV: Empowering LLMs for Verilog Generation through Multi-Level Summarization},
+author={Yang Zhao and Di Huang and Chongxiao Li and Pengwei Jin and Ziyuan Nan and Tianyun Ma and Lei Qi and Yansong Pan and Zhenxing Zhang and Rui Zhang and Xishan Zhang and Zidong Du and Qi Guo and Xing Hu and Yunji Chen},
+year={2024},
+eprint={2407.10424},
+archivePrefix={arXiv},
+primaryClass={cs.PL},
+url={https://arxiv.org/abs/2407.10424},
+}</code>
+          </pre>
+  </div>
   </section>
-
-  <!-- <hr/> -->
-  
 
   <footer class="footer">
     <div class="container">
